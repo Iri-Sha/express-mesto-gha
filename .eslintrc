@@ -4,6 +4,6 @@
         "ecmaVersion": "latest"
     },
     "rules": {
-      "no-underscore-dangle": ["off", {"allow": ["id"]}]
+      "no-underscore-dangle": ["error", {"allow": ["_id"]}]
     }
 }
