@@ -11,15 +11,16 @@ module.exports.getUserById = (req, res) => {
     .then((user) => {
       if (!user) {
         res.status(404).send({ message: 'Запрашиваемый пользователь не найден' });
+      } else {
+        res.status(200).send(user);
       }
-      return res.status(200).send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
         res.status(404).send({ message: 'Запрашиваемый пользователь не найден' });
-        return;
+      } else {
+        res.status(500).send({ message: 'На сервере произошла ошибка' });
       }
-      res.status(500).send({ message: 'На сервере произошла ошибка' });
     });
 };
 
