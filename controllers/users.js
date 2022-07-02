@@ -114,13 +114,13 @@ module.exports.login = (req, res, next) => {
         throw new AuthorizationError('Неправильные почта или пароль');
       }
 
-      return bcrypt.compare(password, user.password);
-    })
-    .then((matched) => {
-      if (!matched) {
-        throw new AuthorizationError('Неправильные почта или пароль');
-      }
-      return res.send({ message: 'Авторизация прошла успешно!' });
+      return bcrypt.compare(password, user.password)
+        .then((matched) => {
+          if (!matched) {
+            throw new AuthorizationError('Неправильные почта или пароль');
+          }
+          return res.send({ message: 'Авторизация прошла успешно!' });
+        });
     })
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, SECRET_KEY, { expiresIn: '7d' });
